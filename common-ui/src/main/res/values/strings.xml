@@ -40,4 +40,5 @@
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="no_network">"Нет интернета, проверьте интернет соединение"</string>
 
+    <string name="skip">Пропустить</string>
 </resources>
