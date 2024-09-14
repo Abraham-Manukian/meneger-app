@@ -33,7 +33,6 @@
             <option value="$PROJECT_DIR$/pos/app" />
             <option value="$PROJECT_DIR$/pos/auth" />
             <option value="$PROJECT_DIR$/pos/common-data" />
-            <option value="$PROJECT_DIR$/pos/dashboard" />
             <option value="$PROJECT_DIR$/pos/erp-api" />
             <option value="$PROJECT_DIR$/pos/erp-schema" />
             <option value="$PROJECT_DIR$/pos/main" />
