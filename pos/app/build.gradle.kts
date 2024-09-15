@@ -147,6 +147,7 @@ dependencies {
     implementation(project(":core:common:serializer"))
     implementation(project(":core:common:converter"))
     implementation(project(":core:ui:compose"))
+
 }
 
 kapt {
