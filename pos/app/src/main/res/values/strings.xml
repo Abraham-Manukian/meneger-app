@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Manager App</string>
     <string name="onboarding">Onboarding</string>
+    <string name="skip">Пропустить</string>
+
 
 </resources>

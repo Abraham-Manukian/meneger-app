@@ -11,12 +11,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
+
     private val logoutUseCase : LogoutUseCase
 ) : ViewModel() {
 
     // Храним текущее состояние шага онбординга
     private val _currentStep = MutableStateFlow(1)
     val currentStep: StateFlow<Int> = _currentStep
+
+
+
 
     fun logOut() = viewModelScope.launch {
         logoutUseCase.invoke()
