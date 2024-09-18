@@ -1,6 +1,5 @@
 package net.nomia.pos.ui.onboarding
 
-import android.widget.ProgressBar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -22,11 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import net.nomia.common.ui.composable.NomiaScrollableScaffold
-import net.nomia.common.ui.composable.ScreenTitleText
 import net.nomia.common.ui.theme.appResources
 import net.nomia.pos.R
 import net.nomia.pos.ui.theme.PosTheme
@@ -78,6 +73,9 @@ fun Onboarding(
         // Получаем текущее состояние онбординга из ViewModel
         val currentStep by viewModel.currentStep.collectAsState()
 
+        val userName by viewModel.userName.collectAsState()
+        val numberOrEmail by viewModel.numberOrEmail.collectAsState()
+
         // Используем новый компонент OnboardingContent
         OnboardingContent(
             showSkip = currentStep < 6,  // Показываем кнопку "Пропустить", если это не последний шаг
@@ -93,7 +91,15 @@ fun Onboarding(
 
                 Spacer(modifier = Modifier.height(8.dp))  // Уменьшаем расстояние между логотипом и прогресс-баром
 
-                // Весь остальной контент (например, формы)
+                when (currentStep) {
+                    1 -> WelcomeForm(
+                        userName = userName,
+                        onUserNameChange = { viewModel.onUserNameChange(it) },
+                        numberOrEmail = numberOrEmail,
+                        onNumberOrEmailChange = { viewModel.onNumberOrEmailChange(it) },
+                        onContinueClick = { viewModel.goToNextStep() }
+                    )
+                }
             }
         }
     }

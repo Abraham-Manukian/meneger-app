@@ -2,6 +2,17 @@
     <string name="app_name">Manager App</string>
     <string name="onboarding">Onboarding</string>
     <string name="skip">Пропустить</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="form1_description">Введите имя, номер телефона или адрес электронной почты для регистрации</string>
+    <string name="user_name_label">Ваше имя</string>
+    <string name="number_or_email_label">Телефон или почта</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="create_first_store">Создайте первое заведение</string>
+    <string name="form2_description">Вы всегда можете изменить данные в настройках</string>
+    <string name="store_name_label">Название заведения</string>
+    <string name="country_and_city_label">Страна и город</string>
+    <string name="address_label">Адрес</string>
+    <string name="is_new_store_label">Это новое заведение</string>
 
 
 </resources>
