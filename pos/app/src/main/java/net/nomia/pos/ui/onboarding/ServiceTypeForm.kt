@@ -42,22 +42,13 @@ fun ServiceTypeForm(
             color = MaterialTheme.colorScheme.onSurface,
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Описание
-        Text(
-            text = stringResource(id = R.string.service_type_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // Чекбоксы для выбора типов сервисов
         val serviceTypes = listOf(
             stringResource(id = R.string.takeaway),
-            stringResource(id = R.string.dine_in),
-            stringResource(id = R.string.delivery)
+            stringResource(id = R.string.in_the_establishment),
+            stringResource(id = R.string.delivery),
         )
 
         serviceTypes.forEach { service ->

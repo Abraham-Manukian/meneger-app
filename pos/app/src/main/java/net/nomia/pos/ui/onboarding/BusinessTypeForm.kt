@@ -1,5 +1,6 @@
 package net.nomia.pos.ui.onboarding
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,15 +43,6 @@ fun BusinessTypeForm(
             color = MaterialTheme.colorScheme.onSurface,
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Описание
-        Text(
-            text = stringResource(id = R.string.business_type_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // Чекбоксы для выбора типов заведений
@@ -59,8 +52,9 @@ fun BusinessTypeForm(
             stringResource(id = R.string.cafe),
             stringResource(id = R.string.dining_room),
             stringResource(id = R.string.coffee_shop),
-            stringResource(id = R.string.culinary),
+            stringResource(id = R.string.cooking),
             stringResource(id = R.string.other)
+
         )
 
         businessTypes.forEach { type ->

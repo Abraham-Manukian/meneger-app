@@ -25,7 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import net.nomia.common.ui.theme.appResources
 import net.nomia.pos.R
 import net.nomia.pos.ui.theme.PosTheme
-
+import net.nomia.common.ui.composable.NomiaProgressBar
+import net.nomia.common.ui.theme.spacers
 
 @Composable
 internal fun OnboardingContent(
@@ -47,6 +48,8 @@ internal fun OnboardingContent(
                 tint = Color.Unspecified,
                 contentDescription = null
             )
+
+            Spacer(modifier = Modifier.height(MaterialTheme.spacers.small))
 
             // Если нужно, показываем кнопку "Пропустить"
             if (showSkip && onSkipClicked != null) {
@@ -86,7 +89,6 @@ fun Onboarding(
 
         val selectedServices by viewModel.selectedServices.collectAsState()
 
-
         // Используем новый компонент OnboardingContent
         OnboardingContent(
             showSkip = currentStep < 6,  // Показываем кнопку "Пропустить", если это не последний шаг
@@ -97,8 +99,8 @@ fun Onboarding(
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                // Прогресс-бар
-                ProgressBar(steps = 6, currentStep = currentStep)
+                // Прогресс-бар из `common-ui`
+                NomiaProgressBar(steps = 6, currentStep = currentStep)
 
                 Spacer(modifier = Modifier.height(8.dp))  // Уменьшаем расстояние между логотипом и прогресс-баром
 
@@ -159,9 +161,3 @@ fun Onboarding(
         }
     }
 }
-
-
-
-
-
-
