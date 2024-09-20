@@ -65,6 +65,7 @@ internal fun OnboardingContent(
     }
 }
 
+@Suppress("StateFlowValueCalledInComposition")
 @Composable
 fun Onboarding(
     viewModel: OnboardingViewModel = hiltViewModel()
@@ -75,6 +76,16 @@ fun Onboarding(
 
         val userName by viewModel.userName.collectAsState()
         val numberOrEmail by viewModel.numberOrEmail.collectAsState()
+
+        val storeName by viewModel.storeName.collectAsState()
+        val countryAndCity by viewModel.countryAndCity.collectAsState()
+        val address by viewModel.address.collectAsState()
+        val isNewStore by viewModel.isNewStore.collectAsState()
+        val automationSystem by viewModel.automationSystem.collectAsState()
+        val selectedBusinessTypes by viewModel.selectedBusinessTypes.collectAsState()
+
+        val selectedServices by viewModel.selectedServices.collectAsState()
+
 
         // Используем новый компонент OnboardingContent
         OnboardingContent(
@@ -99,6 +110,50 @@ fun Onboarding(
                         onNumberOrEmailChange = { viewModel.onNumberOrEmailChange(it) },
                         onContinueClick = { viewModel.goToNextStep() }
                     )
+
+                    2 -> StoreDataForm(
+                        storeName = storeName,
+                        onStoreNameChange = viewModel::onStoreNameChange,
+                        countryAndCity = countryAndCity,
+                        onCountryAndCityChange = viewModel::onCountryAndCityChange,
+                        address = address,
+                        onAddressChange = viewModel::onAddressChange,
+                        isNewStore = isNewStore,
+                        onIsNewStoreChange = viewModel::onIsNewStoreChange,
+                        automationSystem = automationSystem,
+                        onAutomationSystemChange = viewModel::onAutomationSystemChange,
+                        onContinueClick = { viewModel.goToNextStep() }
+                    )
+
+                    3 -> BusinessTypeForm(
+                        selectedTypes = selectedBusinessTypes,
+                        onTypeSelectChange = viewModel::onTypeSelectChange,
+                        onContinueClick = { viewModel.goToNextStep() },
+                        onSkipClick = { viewModel.goToNextStep() }
+                    )
+
+                    4 -> StoreSizeForm(
+                        totalArea = viewModel.totalArea.value,
+                        onTotalAreaChange = viewModel::onTotalAreaChange,
+                        seatingCapacity = viewModel.seatingCapacity.value,
+                        onSeatingCapacityChange = viewModel::onSeatingCapacityChange,
+                        hallArea = viewModel.hallArea.value,
+                        onHallAreaChange = viewModel::onHallAreaChange,
+                        kitchenArea = viewModel.kitchenArea.value,
+                        onKitchenAreaChange = viewModel::onKitchenAreaChange,
+                        onContinueClick = { viewModel.goToNextStep() },
+                        onSkipClick = { viewModel.goToNextStep() }
+                    )
+
+                    5 -> ServiceTypeForm(
+                        selectedServices = selectedServices,
+                        onServiceSelectChange = viewModel::onServiceSelectChange,
+                        onContinueClick = { viewModel.goToNextStep() },
+                        onSkipClick = { viewModel.goToNextStep() }
+                    )
+
+                    6 -> CompletionForm()
+
                 }
             }
         }

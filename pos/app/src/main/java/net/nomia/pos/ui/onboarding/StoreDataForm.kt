@@ -30,6 +30,8 @@ fun StoreDataForm(
     onAddressChange: (String) -> Unit,
     isNewStore: Boolean,
     onIsNewStoreChange: (Boolean) -> Unit,
+    automationSystem: String,
+    onAutomationSystemChange: (String) -> Unit,
     onContinueClick: () -> Unit
 ) {
     Column(
@@ -44,11 +46,6 @@ fun StoreDataForm(
             text = stringResource(id = R.string.create_first_store),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface,
-        )
-        Text(
-            text = stringResource(id = R.string.form2_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.background
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -95,9 +92,23 @@ fun StoreDataForm(
             Text(text = stringResource(id = R.string.is_new_store_label))
         }
 
+        // Поле "Система автоматизации" отображается, если чекбокс НЕ нажат
+        if (!isNewStore) {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Поле для ввода системы автоматизации
+            TextField(
+                value = automationSystem,
+                onValueChange = onAutomationSystemChange,
+                label = { Text(text = stringResource(id = R.string.automation_system_label)) },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
         Spacer(modifier = Modifier.height(24.dp))
 
         // Кнопка "Продолжить"
         ContinueButton(onClick = onContinueClick)
     }
 }
+

@@ -35,6 +35,69 @@ class OnboardingViewModel @Inject constructor(
     private val _isNewStore = MutableStateFlow(false)
     val isNewStore: StateFlow<Boolean> = _isNewStore
 
+    private val _automationSystem = MutableStateFlow("")
+    val automationSystem: StateFlow<String> = _automationSystem
+
+    // Добавляем поле для типа заведений
+    private val _selectedBusinessTypes = MutableStateFlow<List<String>>(emptyList())
+    val selectedBusinessTypes: StateFlow<List<String>> = _selectedBusinessTypes
+
+    // Поля для ввода данных о площади заведения
+    private val _totalArea = MutableStateFlow("")
+    val totalArea: StateFlow<String> = _totalArea
+
+    private val _seatingCapacity = MutableStateFlow("")
+    val seatingCapacity: StateFlow<String> = _seatingCapacity
+
+    private val _hallArea = MutableStateFlow("")
+    val hallArea: StateFlow<String> = _hallArea
+
+    private val _kitchenArea = MutableStateFlow("")
+    val kitchenArea: StateFlow<String> = _kitchenArea
+
+    // Поля для выбора типов сервисов
+    private val _selectedServices = MutableStateFlow<List<String>>(emptyList())
+    val selectedServices: StateFlow<List<String>> = _selectedServices
+
+    // Метод для изменения выбранных типов сервисов
+    fun onServiceSelectChange(service: String) {
+        val currentServices = _selectedServices.value.toMutableList()
+        if (currentServices.contains(service)) {
+            currentServices.remove(service)
+        } else {
+            currentServices.add(service)
+        }
+        _selectedServices.value = currentServices
+    }
+
+    // Методы для изменения данных
+    fun onTotalAreaChange(newValue: String) {
+        _totalArea.value = newValue
+    }
+
+    fun onSeatingCapacityChange(newValue: String) {
+        _seatingCapacity.value = newValue
+    }
+
+    fun onHallAreaChange(newValue: String) {
+        _hallArea.value = newValue
+    }
+
+    fun onKitchenAreaChange(newValue: String) {
+        _kitchenArea.value = newValue
+    }
+
+    // Метод для изменения выбранных типов
+    fun onTypeSelectChange(type: String) {
+        val currentTypes = _selectedBusinessTypes.value.toMutableList()
+        if (currentTypes.contains(type)) {
+            currentTypes.remove(type)
+        } else {
+            currentTypes.add(type)
+        }
+        _selectedBusinessTypes.value = currentTypes
+    }
+
     // Методы для обновления состояния
     fun onStoreNameChange(newName: String) {
         _storeName.value = newName
@@ -50,6 +113,10 @@ class OnboardingViewModel @Inject constructor(
 
     fun onIsNewStoreChange(isNew: Boolean) {
         _isNewStore.value = isNew
+    }
+
+    fun onAutomationSystemChange(newSystem: String) {
+        _automationSystem.value = newSystem
     }
 
     // Функция для обновления имени пользователя

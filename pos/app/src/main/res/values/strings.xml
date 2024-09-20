@@ -13,6 +13,7 @@
     <string name="country_and_city_label">Страна и город</string>
     <string name="address_label">Адрес</string>
     <string name="is_new_store_label">Это новое заведение</string>
+    <string name="automation_system_label">Система автоматизации</string>
 
 
 </resources>
