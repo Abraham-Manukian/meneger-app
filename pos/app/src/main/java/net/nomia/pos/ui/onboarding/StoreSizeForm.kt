@@ -84,19 +84,5 @@ fun StoreSizeForm(
             label = { Text(text = stringResource(id = R.string.kitchen_area_label)) },
             modifier = Modifier.fillMaxWidth()
         )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Кнопки "Пропустить" и "Продолжить"
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            TextButton(onClick = onSkipClick) {
-                Text(text = stringResource(id = R.string.skip_button))
-            }
-
-            ContinueButton(onClick = onContinueClick)
-        }
     }
 }

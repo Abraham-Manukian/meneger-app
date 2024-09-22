@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import net.nomia.common.ui.composable.NomiaOutlinedTextField
 import net.nomia.pos.R
 
 @Composable
@@ -47,35 +48,40 @@ fun StoreDataForm(
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface,
         )
+        Text(
+            text = stringResource(id = R.string.form2_description),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.bodyLarge,
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Поле для ввода названия заведения
-        TextField(
+        NomiaOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = storeName,
             onValueChange = onStoreNameChange,
-            label = { Text(text = stringResource(id = R.string.store_name_label)) },
-            modifier = Modifier.fillMaxWidth()
+            placeholder = { Text(text = stringResource(id = R.string.store_name_label)) }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Поле для ввода страны и города
-        TextField(
+        NomiaOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = countryAndCity,
             onValueChange = onCountryAndCityChange,
-            label = { Text(text = stringResource(id = R.string.country_and_city_label)) },
-            modifier = Modifier.fillMaxWidth()
+            placeholder = { Text(text = stringResource(id = R.string.country_and_city_label)) }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Поле для ввода адреса
-        TextField(
+        NomiaOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = address,
             onValueChange = onAddressChange,
-            label = { Text(text = stringResource(id = R.string.address_label)) },
-            modifier = Modifier.fillMaxWidth()
+            placeholder = { Text(text = stringResource(id = R.string.address_label)) }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -104,11 +110,6 @@ fun StoreDataForm(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Кнопка "Продолжить"
-        ContinueButton(onClick = onContinueClick)
     }
 }
 

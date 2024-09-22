@@ -34,6 +34,7 @@
     <string name="takeaway">Навынос</string>
     <string name="in_the_establishment">В заведении</string>
     <string name="delivery">Доставка</string>
+    <string name="back">Назад</string>
 
 
 </resources>

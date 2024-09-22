@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 private val LightColorPalette = lightColors(
     primary = Color(0xFF6200EA), // Пример основного цвета
     primaryVariant = Color(0xFF3700B3), // Пример варианта основного цвета
-    secondary = Color(0xFF03DAC5) // Пример вторичного цвета
+    secondary = Color(0xFF03DAC5), // Пример вторичного цвета
 )
 
 private val DarkColorPalette = darkColors(

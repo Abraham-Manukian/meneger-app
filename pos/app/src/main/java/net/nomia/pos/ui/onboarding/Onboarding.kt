@@ -1,6 +1,9 @@
 package net.nomia.pos.ui.onboarding
 
+import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.End
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,7 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -26,48 +33,49 @@ import net.nomia.common.ui.theme.appResources
 import net.nomia.pos.R
 import net.nomia.pos.ui.theme.PosTheme
 import net.nomia.common.ui.composable.NomiaProgressBar
+import net.nomia.common.ui.previews.ThemePreviews
 import net.nomia.common.ui.theme.spacers
 
 @Composable
 internal fun OnboardingContent(
-    showSkip: Boolean = false,  // Показывать кнопку "Пропустить"
-    onSkipClicked: (() -> Unit)? = null,  // Действие по клику на "Пропустить"
+    currentStep: Int,
+    totalSteps: Int,
+    showSkip: Boolean = false,
+    onSkipClicked: (() -> Unit)? = null,
+    onBackClick: () -> Unit,
+    onContinueClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()  // Контейнер занимает весь экран
+            .padding(horizontal = 16.dp),  // Отступы по краям
+        verticalArrangement = Arrangement.SpaceBetween  // Разделяем пространство сверху и снизу
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+        // Верхняя часть с иконкой и кнопкой "Пропустить"
+        TopSection(showSkip, onSkipClicked)
+
+        // Основной контент (формы)
+        Column(
+            modifier = Modifier.weight(1f),  // Контент занимает всё оставшееся пространство
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Иконка приложения слева
-            Icon(
-                painter = painterResource(id = MaterialTheme.appResources.textLogoResId),
-                tint = Color.Unspecified,
-                contentDescription = null
-            )
-
-            Spacer(modifier = Modifier.height(MaterialTheme.spacers.small))
-
-            // Если нужно, показываем кнопку "Пропустить"
-            if (showSkip && onSkipClicked != null) {
-                TextButton(
-                    onClick = onSkipClicked
-                ) {
-                    Text(text = stringResource(id = R.string.skip))
-                }
-            }
+            Spacer(modifier = Modifier.height(16.dp))
+            content()
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
-
-        // Контент, который будет находиться под иконкой и кнопкой "Пропустить"
-        content()
+        // Кнопки "Назад" и "Продолжить"
+        FormButtons(
+            currentStep = currentStep,
+            totalSteps = totalSteps,
+            onBackClick = onBackClick,
+            onContinueClick = onContinueClick
+        )
     }
 }
 
+
+@ThemePreviews
 @Suppress("StateFlowValueCalledInComposition")
 @Composable
 fun Onboarding(
@@ -91,18 +99,25 @@ fun Onboarding(
 
         // Используем новый компонент OnboardingContent
         OnboardingContent(
-            showSkip = currentStep < 6,  // Показываем кнопку "Пропустить", если это не последний шаг
-            onSkipClicked = { viewModel.goToNextStep() },  // Используем goToNextStep вместо skipOnboarding
+            currentStep = currentStep,
+            totalSteps = 6,
+            onBackClick = { viewModel.goToPreviousStep() },
+            onContinueClick = { viewModel.goToNextStep() }
         ) {
+            
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
                 // Прогресс-бар из `common-ui`
                 NomiaProgressBar(steps = 6, currentStep = currentStep)
 
-                Spacer(modifier = Modifier.height(8.dp))  // Уменьшаем расстояние между логотипом и прогресс-баром
+                Spacer(modifier = Modifier.height(8.dp))
+                // Уменьшаем расстояние между логотипом и прогресс-баром
 
                 when (currentStep) {
                     1 -> WelcomeForm(
@@ -157,6 +172,7 @@ fun Onboarding(
                     6 -> CompletionForm()
 
                 }
+
             }
         }
     }

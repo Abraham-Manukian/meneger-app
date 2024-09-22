@@ -73,19 +73,5 @@ fun BusinessTypeForm(
             }
             Spacer(modifier = Modifier.height(8.dp))
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Кнопки "Пропустить" и "Продолжить"
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            TextButton(onClick = onSkipClick) {
-                Text(text = stringResource(id = R.string.skip_button))
-            }
-
-            ContinueButton(onClick = onContinueClick)
-        }
     }
 }

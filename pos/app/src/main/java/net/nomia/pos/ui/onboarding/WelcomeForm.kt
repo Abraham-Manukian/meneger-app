@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import net.nomia.common.ui.composable.NomiaOutlinedTextField
 import net.nomia.pos.R
+
 
 
 @Composable
@@ -29,10 +31,10 @@ fun WelcomeForm(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Top,
+
     ) {
         // Заголовок "Добро пожаловать"
         Text(
@@ -43,33 +45,26 @@ fun WelcomeForm(
 
         Text(
             text = stringResource(id = R.string.form1_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.bodyLarge,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Поле для ввода имени пользователя
-        TextField(
+        NomiaOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = userName,
             onValueChange = onUserNameChange,
-            label = { Text(text = stringResource(id = R.string.user_name_label)) },
-            modifier = Modifier.fillMaxWidth()
+            placeholder = { Text(text = stringResource(id = R.string.user_name_label)) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Поле для ввода имени пользователя
-        TextField(
+        NomiaOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = numberOrEmail,
             onValueChange = onNumberOrEmailChange,
-            label = { Text(text = stringResource(id = R.string.number_or_email_label)) },
-            modifier = Modifier.fillMaxWidth()
+            placeholder = { Text(text = stringResource(id = R.string.number_or_email_label)) }
         )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Кнопка "Продолжить"
-        ContinueButton(onClick = onContinueClick)
     }
 }
