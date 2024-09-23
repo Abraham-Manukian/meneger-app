@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import net.nomia.common.ui.composable.NomiaCheckBox
 import net.nomia.common.ui.composable.NomiaOutlinedTextField
 import net.nomia.pos.R
 
@@ -89,8 +90,8 @@ fun StoreDataForm(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Checkbox(
-                checked = isNewStore,
+            NomiaCheckBox(
+                isChecked = isNewStore,
                 onCheckedChange = onIsNewStoreChange
             )
             Spacer(modifier = Modifier.width(8.dp))

@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import net.nomia.common.ui.composable.NomiaCheckBox
 import net.nomia.pos.R
 
 
@@ -62,8 +63,8 @@ fun BusinessTypeForm(
                     .clickable { onTypeSelectChange(type) },
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Checkbox(
-                    checked = selectedTypes.contains(type),
+                NomiaCheckBox(
+                    isChecked = selectedTypes.contains(type),
                     onCheckedChange = { onTypeSelectChange(type) }
                 )
                 Spacer(modifier = Modifier.width(8.dp))

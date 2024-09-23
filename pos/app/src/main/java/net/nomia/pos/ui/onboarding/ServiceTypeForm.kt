@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import net.nomia.common.ui.composable.NomiaCheckBox
 import net.nomia.pos.R
 
 @Composable
@@ -56,8 +57,8 @@ fun ServiceTypeForm(
                     .clickable { onServiceSelectChange(service) },
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Checkbox(
-                    checked = selectedServices.contains(service),
+                NomiaCheckBox(
+                    isChecked = selectedServices.contains(service),
                     onCheckedChange = { onServiceSelectChange(service) }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
