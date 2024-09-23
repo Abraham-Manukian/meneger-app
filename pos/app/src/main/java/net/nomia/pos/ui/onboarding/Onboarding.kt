@@ -120,6 +120,7 @@ fun Onboarding(
                 // Уменьшаем расстояние между логотипом и прогресс-баром
 
                 when (currentStep) {
+
                     1 -> WelcomeForm(
                         userName = userName,
                         onUserNameChange = { viewModel.onUserNameChange(it) },
@@ -138,15 +139,12 @@ fun Onboarding(
                         isNewStore = isNewStore,
                         onIsNewStoreChange = viewModel::onIsNewStoreChange,
                         automationSystem = automationSystem,
-                        onAutomationSystemChange = viewModel::onAutomationSystemChange,
-                        onContinueClick = { viewModel.goToNextStep() }
+                        onAutomationSystemChange = viewModel::onAutomationSystemChange
                     )
 
                     3 -> BusinessTypeForm(
                         selectedTypes = selectedBusinessTypes,
-                        onTypeSelectChange = viewModel::onTypeSelectChange,
-                        onContinueClick = { viewModel.goToNextStep() },
-                        onSkipClick = { viewModel.goToNextStep() }
+                        onTypeSelectChange = viewModel::onTypeSelectChange
                     )
 
                     4 -> StoreSizeForm(
@@ -157,22 +155,17 @@ fun Onboarding(
                         hallArea = viewModel.hallArea.value,
                         onHallAreaChange = viewModel::onHallAreaChange,
                         kitchenArea = viewModel.kitchenArea.value,
-                        onKitchenAreaChange = viewModel::onKitchenAreaChange,
-                        onContinueClick = { viewModel.goToNextStep() },
-                        onSkipClick = { viewModel.goToNextStep() }
+                        onKitchenAreaChange = viewModel::onKitchenAreaChange
                     )
 
                     5 -> ServiceTypeForm(
                         selectedServices = selectedServices,
                         onServiceSelectChange = viewModel::onServiceSelectChange,
-                        onContinueClick = { viewModel.goToNextStep() },
-                        onSkipClick = { viewModel.goToNextStep() }
                     )
 
                     6 -> CompletionForm()
 
                 }
-
             }
         }
     }

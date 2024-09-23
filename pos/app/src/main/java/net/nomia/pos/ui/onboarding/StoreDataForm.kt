@@ -33,14 +33,13 @@ fun StoreDataForm(
     onIsNewStoreChange: (Boolean) -> Unit,
     automationSystem: String,
     onAutomationSystemChange: (String) -> Unit,
-    onContinueClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Top
     ) {
         // Заголовок "Создайте первое заведение"
         Text(
@@ -95,7 +94,11 @@ fun StoreDataForm(
                 onCheckedChange = onIsNewStoreChange
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = stringResource(id = R.string.is_new_store_label))
+            Text(text = stringResource(
+                id = R.string.is_new_store_label),
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
 
         // Поле "Система автоматизации" отображается, если чекбокс НЕ нажат
@@ -103,11 +106,11 @@ fun StoreDataForm(
             Spacer(modifier = Modifier.height(16.dp))
 
             // Поле для ввода системы автоматизации
-            TextField(
+            NomiaOutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = automationSystem,
                 onValueChange = onAutomationSystemChange,
-                label = { Text(text = stringResource(id = R.string.automation_system_label)) },
-                modifier = Modifier.fillMaxWidth()
+                placeholder = { Text(text = stringResource(id = R.string.automation_system_label)) }
             )
         }
     }

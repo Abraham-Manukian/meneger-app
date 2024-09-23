@@ -24,16 +24,14 @@ import net.nomia.pos.R
 @Composable
 fun ServiceTypeForm(
     selectedServices: List<String>,
-    onServiceSelectChange: (String) -> Unit,
-    onContinueClick: () -> Unit,
-    onSkipClick: () -> Unit
+    onServiceSelectChange: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Top
     ) {
         // Заголовок
         Text(

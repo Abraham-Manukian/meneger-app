@@ -31,15 +31,13 @@ fun StoreSizeForm(
     onHallAreaChange: (String) -> Unit,
     kitchenArea: String,
     onKitchenAreaChange: (String) -> Unit,
-    onContinueClick: () -> Unit,
-    onSkipClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Top,
     ) {
         // Заголовок
         Text(
