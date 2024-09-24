@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import net.nomia.auth.ui.external.model.Code
 import net.nomia.common.ui.composable.NomiaFilledButton
 
 @Composable
@@ -32,7 +31,7 @@ fun FormButtons(
 ) {
     Column {
         Divider(
-            color = MaterialTheme.colorScheme.primaryContainer,
+            color = MaterialTheme.colorScheme.outline,
             thickness = 1.dp,
             modifier = Modifier.fillMaxWidth()
         )
@@ -42,8 +41,8 @@ fun FormButtons(
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // Кнопка "Назад", показываем, если не первый шаг
-            if (currentStep > 1) {
+            // Кнопка "Назад", показываем, если не первый и не последний шаг
+            if (currentStep > 1 && currentStep < totalSteps) {
                 IconButton(
                     onClick = onBackClick,
                     modifier = Modifier
@@ -58,20 +57,19 @@ fun FormButtons(
                 }
             }
 
-            // Кнопка "Продолжить"
-            ContinueButton(
-                onClick = onContinueClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(start = if (currentStep > 1) 16.dp else 0.dp)
-            )
+            // Кнопка "Продолжить", показываем, если не последний шаг
+            if (currentStep < totalSteps) {
+                ContinueButton(
+                    onClick = onContinueClick,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .padding(start = if (currentStep > 1) 16.dp else 0.dp)
+                )
+            }
         }
     }
-
 }
-
-
 
 @Composable
 fun ContinueButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
@@ -85,4 +83,3 @@ fun ContinueButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         )
     }
 }
-

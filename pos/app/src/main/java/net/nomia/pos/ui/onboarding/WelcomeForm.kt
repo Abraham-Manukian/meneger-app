@@ -39,7 +39,7 @@ fun WelcomeForm(
         // Заголовок "Добро пожаловать"
         Text(
             text = stringResource(id = R.string.welcome),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
         )
 
@@ -55,7 +55,10 @@ fun WelcomeForm(
             modifier = Modifier.fillMaxWidth(),
             value = userName,
             onValueChange = onUserNameChange,
-            placeholder = { Text(text = stringResource(id = R.string.user_name_label)) }
+            placeholder = { Text(
+                text = stringResource(id = R.string.user_name_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -64,7 +67,10 @@ fun WelcomeForm(
             modifier = Modifier.fillMaxWidth(),
             value = numberOrEmail,
             onValueChange = onNumberOrEmailChange,
-            placeholder = { Text(text = stringResource(id = R.string.number_or_email_label)) }
+            placeholder = { Text(
+                text = stringResource(id = R.string.number_or_email_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) }
         )
     }
 }

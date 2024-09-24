@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -38,14 +40,14 @@ fun StoreDataForm(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
         // Заголовок "Создайте первое заведение"
         Text(
             text = stringResource(id = R.string.create_first_store),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Text(
@@ -61,17 +63,35 @@ fun StoreDataForm(
             modifier = Modifier.fillMaxWidth(),
             value = storeName,
             onValueChange = onStoreNameChange,
-            placeholder = { Text(text = stringResource(id = R.string.store_name_label)) }
+            placeholder = { Text(
+                text = stringResource(id = R.string.store_name_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant) }
         )
 
+        Text(text = stringResource(
+            id = R.string.form2_description_store_name),
+            modifier = Modifier.padding(8.dp),
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodySmall
+        )
         Spacer(modifier = Modifier.height(16.dp))
-
         // Поле для ввода страны и города
         NomiaOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = countryAndCity,
             onValueChange = onCountryAndCityChange,
-            placeholder = { Text(text = stringResource(id = R.string.country_and_city_label)) }
+            placeholder = { Text(
+                text = stringResource(id = R.string.country_and_city_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) }
+        )
+
+        Text(text = stringResource(
+            id = R.string.form2_description_country_and_city),
+            modifier = Modifier.padding(8.dp),
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodySmall
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -81,7 +101,10 @@ fun StoreDataForm(
             modifier = Modifier.fillMaxWidth(),
             value = address,
             onValueChange = onAddressChange,
-            placeholder = { Text(text = stringResource(id = R.string.address_label)) }
+            placeholder = { Text(
+                text = stringResource(id = R.string.address_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -95,11 +118,27 @@ fun StoreDataForm(
                 onCheckedChange = onIsNewStoreChange
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = stringResource(
-                id = R.string.is_new_store_label),
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.bodyLarge
-            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Top,
+            ){
+                Text(text = stringResource(
+                    id = R.string.is_new_store_label),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(text = stringResource(
+                    id = R.string.form2_description_check_box),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
+
         }
 
         // Поле "Система автоматизации" отображается, если чекбокс НЕ нажат
@@ -111,7 +150,17 @@ fun StoreDataForm(
                 modifier = Modifier.fillMaxWidth(),
                 value = automationSystem,
                 onValueChange = onAutomationSystemChange,
-                placeholder = { Text(text = stringResource(id = R.string.automation_system_label)) }
+                placeholder = { Text(
+                    text = stringResource(id = R.string.automation_system_label),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,) }
+            )
+
+            Text(text = stringResource(
+                id = R.string.form2_description_automation_system),
+                modifier = Modifier.padding(8.dp),
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodySmall
             )
         }
     }

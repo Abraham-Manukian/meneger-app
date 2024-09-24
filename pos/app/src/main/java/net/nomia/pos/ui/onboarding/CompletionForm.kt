@@ -31,23 +31,13 @@ import net.nomia.pos.R
 fun CompletionForm() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
-        // Иконка и заголовок
-        Icon(
-            painter = painterResource(id = MaterialTheme.appResources.textLogoResId),
-            tint = Color.Unspecified,
-            contentDescription = null
-        )
-
-        Spacer(modifier = Modifier.height(40.dp))
-
         Text(
             text = stringResource(id = R.string.thank_you),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
@@ -57,9 +47,8 @@ fun CompletionForm() {
         // Описание
         Text(
             text = stringResource(id = R.string.thank_you_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

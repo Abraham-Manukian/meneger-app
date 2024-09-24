@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import net.nomia.common.ui.composable.NomiaOutlinedTextField
 import net.nomia.pos.R
 
 @Composable
@@ -34,52 +35,65 @@ fun StoreSizeForm(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize() ,
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top,
     ) {
         // Заголовок
         Text(
             text = stringResource(id = R.string.store_size_title),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
+
         // Поля для ввода данных о площади помещения, количестве мест, площади залов и кухни
-        OutlinedTextField(
+        NomiaOutlinedTextField(
             value = totalArea,
             onValueChange = onTotalAreaChange,
-            label = { Text(text = stringResource(id = R.string.total_area_label)) },
+            placeholder = { Text(
+                text = stringResource(id = R.string.total_area_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                ) },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
+        NomiaOutlinedTextField(
             value = seatingCapacity,
             onValueChange = onSeatingCapacityChange,
-            label = { Text(text = stringResource(id = R.string.seating_capacity_label)) },
+            placeholder = { Text(
+                text = stringResource(id = R.string.seating_capacity_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
+        NomiaOutlinedTextField(
             value = hallArea,
             onValueChange = onHallAreaChange,
-            label = { Text(text = stringResource(id = R.string.hall_area_label)) },
+            placeholder = { Text(
+                text = stringResource(id = R.string.hall_area_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
+        NomiaOutlinedTextField(
             value = kitchenArea,
             onValueChange = onKitchenAreaChange,
-            label = { Text(text = stringResource(id = R.string.kitchen_area_label)) },
+            placeholder = { Text(
+                text = stringResource(id = R.string.kitchen_area_label),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,) },
             modifier = Modifier.fillMaxWidth()
         )
     }

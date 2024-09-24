@@ -30,11 +30,16 @@
     <string name="kitchen_area_label">Площадь кухни</string>
     <string name="thank_you">Спасибо за заявку!</string>
     <string name="thank_you_description">Наш менеджер скоро свяжется с вами для предоставления доступа к сервису</string>
-    <string name="business_type_title">Какие типы сервисов вы будете предоставлять в вашем заведении?</string>
+    <string name="business_type_title">Каким типом заведения вы владеете?</string>
     <string name="takeaway">Навынос</string>
     <string name="in_the_establishment">В заведении</string>
     <string name="delivery">Доставка</string>
     <string name="back">Назад</string>
+    <string name="form2_description_check_box">Отметьте галочкой, если ваше заведение только начало работу</string>
+    <string name="form2_description_store_name">Далее вы сможете добавлять еще заведения</string>
+    <string name="form2_description_country_and_city">Требуется для определения часового пояса</string>
+    <string name="form2_description_automation_system">Название системы, которой вы пользовались ранее</string>
+    <string name="form3_description">Расскажите немного больше о вашем бизнесе, чтобы мы смогли подобрать для вас полезные инструменты</string>
 
 
 </resources>
