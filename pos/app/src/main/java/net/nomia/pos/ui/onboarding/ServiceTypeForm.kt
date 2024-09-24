@@ -19,7 +19,8 @@ import net.nomia.pos.R
 @Composable
 fun ServiceTypeForm(
     selectedServices: List<String>,
-    onServiceSelectChange: (String) -> Unit
+    onServiceSelectChange: (String) -> Unit,
+    onSkipChange: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -80,5 +81,6 @@ fun ServiceTypeForm(
             )
         }
     }
+    onSkipChange(true)
 }
 

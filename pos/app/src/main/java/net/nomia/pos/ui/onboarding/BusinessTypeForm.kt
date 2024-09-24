@@ -22,6 +22,7 @@ import net.nomia.pos.R
 fun BusinessTypeForm(
     selectedTypes: List<String>,
     onTypeSelectChange: (String) -> Unit,
+    onSkipChange: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -95,5 +96,6 @@ fun BusinessTypeForm(
             )
         }
     }
+    onSkipChange(true)
 }
 

@@ -59,6 +59,16 @@ class OnboardingViewModel @Inject constructor(
     private val _selectedServices = MutableStateFlow<List<String>>(emptyList())
     val selectedServices: StateFlow<List<String>> = _selectedServices
 
+    // Логика показа кнопки "Пропустить"
+    private val _showSkip = MutableStateFlow(false)
+    val showSkip: StateFlow<Boolean> = _showSkip
+
+
+    // Логика для отображения кнопки "Пропустить"
+     fun updateSkipButtonState(shouldShowSkip: Boolean) {
+        _showSkip.value = shouldShowSkip
+     }
+
     // Метод для изменения выбранных типов сервисов
     fun onServiceSelectChange(service: String) {
         val currentServices = _selectedServices.value.toMutableList()

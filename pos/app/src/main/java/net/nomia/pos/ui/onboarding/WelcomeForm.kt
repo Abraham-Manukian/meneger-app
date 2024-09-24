@@ -27,7 +27,8 @@ fun WelcomeForm(
     onUserNameChange: (String) -> Unit,
     numberOrEmail: String,
     onNumberOrEmailChange: (String) -> Unit,
-    onContinueClick: () -> Unit
+    onContinueClick: () -> Unit,
+    onSkipChange: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -73,4 +74,5 @@ fun WelcomeForm(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,) }
         )
     }
+    onSkipChange(false)
 }

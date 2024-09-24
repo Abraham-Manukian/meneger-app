@@ -18,7 +18,7 @@ import net.nomia.pos.R
 import net.nomia.common.ui.theme.appResources
 
 @Composable
-fun TopSection(showSkip: Boolean, onSkipClicked: (() -> Unit)?) {
+fun TopSection(showSkip: Boolean, onSkipClicked: (() -> Unit)?, currentStep: Int) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -32,7 +32,7 @@ fun TopSection(showSkip: Boolean, onSkipClicked: (() -> Unit)?) {
         )
 
         // Кнопка "Пропустить", если её нужно показать
-        if (showSkip && onSkipClicked != null) {
+        if (showSkip == true && onSkipClicked != null ) {
             TextButton(onClick = onSkipClicked) {
                 Text(text = stringResource(id = R.string.skip))
             }

@@ -28,7 +28,7 @@ import net.nomia.pos.R
 
 
 @Composable
-fun CompletionForm() {
+fun CompletionForm(onSkipChange: (Boolean) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -51,4 +51,5 @@ fun CompletionForm() {
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
+    onSkipChange(false)
 }

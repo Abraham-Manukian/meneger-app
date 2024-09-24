@@ -32,6 +32,7 @@ fun StoreSizeForm(
     onHallAreaChange: (String) -> Unit,
     kitchenArea: String,
     onKitchenAreaChange: (String) -> Unit,
+    onSkipChange: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -97,4 +98,5 @@ fun StoreSizeForm(
             modifier = Modifier.fillMaxWidth()
         )
     }
+    onSkipChange(true)
 }

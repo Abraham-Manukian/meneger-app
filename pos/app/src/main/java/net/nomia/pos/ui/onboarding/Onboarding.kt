@@ -1,46 +1,27 @@
 package net.nomia.pos.ui.onboarding
 
-import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.End
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import net.nomia.common.ui.theme.appResources
-import net.nomia.pos.R
 import net.nomia.pos.ui.theme.PosTheme
 import net.nomia.common.ui.composable.NomiaProgressBar
 import net.nomia.common.ui.previews.ThemePreviews
-import net.nomia.common.ui.theme.spacers
 
 @Composable
 internal fun OnboardingContent(
     currentStep: Int,
     totalSteps: Int,
-    showSkip: Boolean = false,
+    showSkip: Boolean,
     onSkipClicked: (() -> Unit)? = null,
     onBackClick: () -> Unit,
     onContinueClick: () -> Unit,
@@ -48,19 +29,22 @@ internal fun OnboardingContent(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()  // Контейнер занимает весь экран
-            .padding(horizontal = 16.dp),  // Отступы по краям
-        verticalArrangement = Arrangement.SpaceBetween  // Разделяем пространство сверху и снизу
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         // Верхняя часть с иконкой и кнопкой "Пропустить"
-        TopSection(showSkip, onSkipClicked)
+        TopSection(
+            showSkip = showSkip,
+            onSkipClicked = onSkipClicked,
+            currentStep = currentStep
+        )
 
         // Основной контент (формы)
         Column(
-            modifier = Modifier.weight(1f),  // Контент занимает всё оставшееся пространство
+            modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
             content()
         }
 
@@ -75,36 +59,23 @@ internal fun OnboardingContent(
 }
 
 
-@ThemePreviews
-@Suppress("StateFlowValueCalledInComposition")
 @Composable
 fun Onboarding(
     viewModel: OnboardingViewModel = hiltViewModel()
 ) {
     PosTheme {
-        // Получаем текущее состояние онбординга из ViewModel
         val currentStep by viewModel.currentStep.collectAsState()
+        val showSkip by viewModel.showSkip.collectAsState()
 
-        val userName by viewModel.userName.collectAsState()
-        val numberOrEmail by viewModel.numberOrEmail.collectAsState()
-
-        val storeName by viewModel.storeName.collectAsState()
-        val countryAndCity by viewModel.countryAndCity.collectAsState()
-        val address by viewModel.address.collectAsState()
-        val isNewStore by viewModel.isNewStore.collectAsState()
-        val automationSystem by viewModel.automationSystem.collectAsState()
-        val selectedBusinessTypes by viewModel.selectedBusinessTypes.collectAsState()
-
-        val selectedServices by viewModel.selectedServices.collectAsState()
-
-        // Используем новый компонент OnboardingContent
         OnboardingContent(
             currentStep = currentStep,
             totalSteps = 6,
+            showSkip = showSkip,
+            onSkipClicked = { viewModel.goToNextStep() },
             onBackClick = { viewModel.goToPreviousStep() },
             onContinueClick = { viewModel.goToNextStep() }
         ) {
-            
+            // Основной контент форм
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -113,60 +84,69 @@ fun Onboarding(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                // Прогресс-бар из `common-ui`
+                // Прогресс-бар
                 NomiaProgressBar(steps = 6, currentStep = currentStep)
 
                 Spacer(modifier = Modifier.height(8.dp))
-                // Уменьшаем расстояние между логотипом и прогресс-баром
 
                 when (currentStep) {
-
                     1 -> WelcomeForm(
-                        userName = userName,
+                        userName = viewModel.userName.collectAsState().value,
                         onUserNameChange = { viewModel.onUserNameChange(it) },
-                        numberOrEmail = numberOrEmail,
+                        numberOrEmail = viewModel.numberOrEmail.collectAsState().value,
                         onNumberOrEmailChange = { viewModel.onNumberOrEmailChange(it) },
-                        onContinueClick = { viewModel.goToNextStep() }
+                        onContinueClick = { viewModel.goToNextStep()},
+                        onSkipChange = { viewModel.updateSkipButtonState(it) }
                     )
 
+
                     2 -> StoreDataForm(
-                        storeName = storeName,
+                        storeName = viewModel.storeName.collectAsState().value,
                         onStoreNameChange = viewModel::onStoreNameChange,
-                        countryAndCity = countryAndCity,
+                        countryAndCity = viewModel.countryAndCity.collectAsState().value,
                         onCountryAndCityChange = viewModel::onCountryAndCityChange,
-                        address = address,
+                        address = viewModel.address.collectAsState().value,
                         onAddressChange = viewModel::onAddressChange,
-                        isNewStore = isNewStore,
+                        isNewStore = viewModel.isNewStore.collectAsState().value,
                         onIsNewStoreChange = viewModel::onIsNewStoreChange,
-                        automationSystem = automationSystem,
-                        onAutomationSystemChange = viewModel::onAutomationSystemChange
+                        automationSystem = viewModel.automationSystem.collectAsState().value,
+                        onAutomationSystemChange = viewModel::onAutomationSystemChange,
+                        onSkipChange = { viewModel.updateSkipButtonState(it) }
                     )
 
                     3 -> BusinessTypeForm(
-                        selectedTypes = selectedBusinessTypes,
-                        onTypeSelectChange = viewModel::onTypeSelectChange
+                        selectedTypes = viewModel.selectedBusinessTypes.collectAsState().value,
+                        onTypeSelectChange = viewModel::onTypeSelectChange,
+                        onSkipChange = { viewModel.updateSkipButtonState(it) }
                     )
 
                     4 -> StoreSizeForm(
-                        totalArea = viewModel.totalArea.value,
+                        totalArea = viewModel.totalArea.collectAsState().value,
                         onTotalAreaChange = viewModel::onTotalAreaChange,
-                        seatingCapacity = viewModel.seatingCapacity.value,
+                        seatingCapacity = viewModel.seatingCapacity.collectAsState().value,
                         onSeatingCapacityChange = viewModel::onSeatingCapacityChange,
-                        hallArea = viewModel.hallArea.value,
+                        hallArea = viewModel.hallArea.collectAsState().value,
                         onHallAreaChange = viewModel::onHallAreaChange,
-                        kitchenArea = viewModel.kitchenArea.value,
-                        onKitchenAreaChange = viewModel::onKitchenAreaChange
+                        kitchenArea = viewModel.kitchenArea.collectAsState().value,
+                        onKitchenAreaChange = viewModel::onKitchenAreaChange,
+                        onSkipChange = { viewModel.updateSkipButtonState(it) }
                     )
 
                     5 -> ServiceTypeForm(
-                        selectedServices = selectedServices,
+                        selectedServices = viewModel.selectedServices.collectAsState().value,
                         onServiceSelectChange = viewModel::onServiceSelectChange,
+                        onSkipChange = { viewModel.updateSkipButtonState(it) }
                     )
 
-                    6 -> CompletionForm()
-
+                    6 -> CompletionForm(
+                        onSkipChange = { viewModel.updateSkipButtonState(it) }
+                    )
                 }
             }
         }
     }
 }
+
+
+
+

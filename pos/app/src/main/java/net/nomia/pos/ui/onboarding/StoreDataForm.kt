@@ -36,6 +36,7 @@ fun StoreDataForm(
     onIsNewStoreChange: (Boolean) -> Unit,
     automationSystem: String,
     onAutomationSystemChange: (String) -> Unit,
+    onSkipChange: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -164,5 +165,6 @@ fun StoreDataForm(
             )
         }
     }
+    onSkipChange(false)
 }
 
