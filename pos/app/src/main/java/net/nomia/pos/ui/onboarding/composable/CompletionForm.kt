@@ -1,4 +1,4 @@
-package net.nomia.pos.ui.onboarding
+package net.nomia.pos.ui.onboarding.composable
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,7 +28,7 @@ import net.nomia.pos.R
 
 
 @Composable
-fun CompletionForm(onSkipChange: (Boolean) -> Unit) {
+internal fun CompletionForm(onSkipChange: (Boolean) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),

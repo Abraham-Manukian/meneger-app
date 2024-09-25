@@ -1,4 +1,4 @@
-package net.nomia.pos.ui.onboarding
+package net.nomia.pos.ui.onboarding.composable
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -19,7 +18,7 @@ import net.nomia.common.ui.composable.NomiaCheckBox
 import net.nomia.pos.R
 
 @Composable
-fun BusinessTypeForm(
+internal fun BusinessTypeForm(
     selectedTypes: List<String>,
     onTypeSelectChange: (String) -> Unit,
     onSkipChange: (Boolean) -> Unit
@@ -31,7 +30,7 @@ fun BusinessTypeForm(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-        // Заголовок
+
         Text(
             text = stringResource(id = R.string.business_type_title),
             style = MaterialTheme.typography.headlineSmall,
@@ -46,7 +45,6 @@ fun BusinessTypeForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Чекбоксы для выбора типов заведений с иконками
         val businessTypes = listOf(
             stringResource(id = R.string.restaurant) to painterResource(id = R.drawable.ic_restaurant),
             stringResource(id = R.string.bar) to painterResource(id = R.drawable.ic_bar),
@@ -62,14 +60,13 @@ fun BusinessTypeForm(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onTypeSelectChange(type) }
-                    .padding(top = 16.dp)
-                ,
+                    .padding(top = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     painter = icon,
                     contentDescription = null,
-                    modifier = Modifier.size(24.dp) // Иконка
+                    modifier = Modifier.size(24.dp)
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))

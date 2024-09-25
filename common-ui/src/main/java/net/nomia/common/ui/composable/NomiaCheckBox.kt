@@ -21,29 +21,29 @@ fun NomiaCheckBox(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    checkedColor: Color = MaterialTheme.colorScheme.surfaceTint,   // Цвет активного состояния
-    uncheckedBorderColor: Color = MaterialTheme.colorScheme.onSurfaceVariant // Цвет границы для неактивного состояния
+    checkedColor: Color = MaterialTheme.colorScheme.surfaceTint,
+    uncheckedBorderColor: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Box(
         modifier = modifier
-            .size(18.dp)  // Размер чекбокса 18x18px
+            .size(18.dp)
             .border(
-                width = 2.dp,  // Ширина обводки 2px
-                color = if (!isChecked) uncheckedBorderColor else checkedColor,  // Цвет обводки для неактивного состояния
-                shape = RoundedCornerShape(topStart = 2.dp)  // Скругленные углы
+                width = 2.dp,
+                color = if (!isChecked) uncheckedBorderColor else checkedColor,
+                shape = RoundedCornerShape(topStart = 2.dp)
             )
             .background(
-                color = if (isChecked) checkedColor else Color.Transparent,  // Фон для активного состояния
-                shape = RoundedCornerShape(topStart = 2.dp)  // Скругленные углы
+                color = if (isChecked) checkedColor else Color.Transparent,
+                shape = RoundedCornerShape(topStart = 2.dp)
             )
-            .clickable { onCheckedChange(!isChecked) },  // Изменение состояния при клике
+            .clickable { onCheckedChange(!isChecked) },
         contentAlignment = Alignment.Center
     ) {
         if (isChecked) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_check_24),  // Иконка галочки
+                painter = painterResource(id = R.drawable.ic_check_24),
                 contentDescription = null,
-                tint = Color.White,  // Белая галочка
+                tint = Color.White,
                 modifier = Modifier.size(16.dp)
             )
         }

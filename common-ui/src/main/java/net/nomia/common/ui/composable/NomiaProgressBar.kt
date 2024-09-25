@@ -28,12 +28,12 @@ fun NomiaProgressBar(
             val color = if (i <= currentStep) activeColor else inactiveColor
             Box(
                 modifier = Modifier
-                    .weight(1f)  // равное распределение ширины для каждого шага
+                    .weight(1f)
                     .height(height)
                     .background(color = color)
             )
             if (i < steps) {
-                Spacer(modifier = Modifier.width(separatorWidth))  // разделитель между шагами
+                Spacer(modifier = Modifier.width(separatorWidth))
             }
         }
     }

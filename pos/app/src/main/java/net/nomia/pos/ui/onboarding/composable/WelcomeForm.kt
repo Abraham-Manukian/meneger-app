@@ -1,4 +1,4 @@
-package net.nomia.pos.ui.onboarding
+package net.nomia.pos.ui.onboarding.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,12 +22,11 @@ import net.nomia.pos.R
 
 
 @Composable
-fun WelcomeForm(
+internal fun WelcomeForm(
     userName: String,
     onUserNameChange: (String) -> Unit,
     numberOrEmail: String,
     onNumberOrEmailChange: (String) -> Unit,
-    onContinueClick: () -> Unit,
     onSkipChange: (Boolean) -> Unit
 ) {
     Column(
@@ -37,7 +36,6 @@ fun WelcomeForm(
         verticalArrangement = Arrangement.Top,
 
     ) {
-        // Заголовок "Добро пожаловать"
         Text(
             text = stringResource(id = R.string.welcome),
             style = MaterialTheme.typography.headlineSmall,

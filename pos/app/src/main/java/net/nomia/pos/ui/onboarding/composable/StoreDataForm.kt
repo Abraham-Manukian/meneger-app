@@ -1,4 +1,4 @@
-package net.nomia.pos.ui.onboarding
+package net.nomia.pos.ui.onboarding.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,7 @@ import net.nomia.common.ui.composable.NomiaOutlinedTextField
 import net.nomia.pos.R
 
 @Composable
-fun StoreDataForm(
+internal fun StoreDataForm(
     storeName: String,
     onStoreNameChange: (String) -> Unit,
     countryAndCity: String,
@@ -45,12 +45,12 @@ fun StoreDataForm(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
-        // Заголовок "Создайте первое заведение"
         Text(
             text = stringResource(id = R.string.create_first_store),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
         )
+
         Text(
             text = stringResource(id = R.string.form2_description),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -59,7 +59,6 @@ fun StoreDataForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Поле для ввода названия заведения
         NomiaOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = storeName,
@@ -76,8 +75,9 @@ fun StoreDataForm(
             color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.bodySmall
         )
+
         Spacer(modifier = Modifier.height(16.dp))
-        // Поле для ввода страны и города
+
         NomiaOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = countryAndCity,
@@ -97,7 +97,6 @@ fun StoreDataForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Поле для ввода адреса
         NomiaOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = address,
@@ -110,7 +109,6 @@ fun StoreDataForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Чекбокс "Это новое заведение"
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -142,11 +140,9 @@ fun StoreDataForm(
 
         }
 
-        // Поле "Система автоматизации" отображается, если чекбокс НЕ нажат
         if (!isNewStore) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Поле для ввода системы автоматизации
             NomiaOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = automationSystem,

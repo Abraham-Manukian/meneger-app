@@ -1,4 +1,4 @@
-package net.nomia.pos.ui.onboarding
+package net.nomia.pos.ui.onboarding.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,7 +23,7 @@ import net.nomia.common.ui.composable.NomiaOutlinedTextField
 import net.nomia.pos.R
 
 @Composable
-fun StoreSizeForm(
+internal fun StoreSizeForm(
     totalArea: String,
     onTotalAreaChange: (String) -> Unit,
     seatingCapacity: String,
@@ -40,7 +40,6 @@ fun StoreSizeForm(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top,
     ) {
-        // Заголовок
         Text(
             text = stringResource(id = R.string.store_size_title),
             style = MaterialTheme.typography.headlineSmall,
@@ -49,8 +48,6 @@ fun StoreSizeForm(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-
-        // Поля для ввода данных о площади помещения, количестве мест, площади залов и кухни
         NomiaOutlinedTextField(
             value = totalArea,
             onValueChange = onTotalAreaChange,

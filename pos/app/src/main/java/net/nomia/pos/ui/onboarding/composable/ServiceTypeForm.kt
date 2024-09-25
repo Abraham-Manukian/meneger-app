@@ -1,4 +1,4 @@
-package net.nomia.pos.ui.onboarding
+package net.nomia.pos.ui.onboarding.composable
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -17,7 +16,7 @@ import net.nomia.common.ui.composable.NomiaCheckBox
 import net.nomia.pos.R
 
 @Composable
-fun ServiceTypeForm(
+internal fun ServiceTypeForm(
     selectedServices: List<String>,
     onServiceSelectChange: (String) -> Unit,
     onSkipChange: (Boolean) -> Unit
@@ -28,7 +27,7 @@ fun ServiceTypeForm(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
-        // Заголовок
+
         Text(
             text = stringResource(id = R.string.service_type_title),
             style = MaterialTheme.typography.headlineSmall,
@@ -37,7 +36,6 @@ fun ServiceTypeForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Чекбоксы для выбора типов сервисов с иконками
         val serviceTypes = listOf(
             stringResource(id = R.string.takeaway) to painterResource(id = R.drawable.ic_restaurant),
             stringResource(id = R.string.in_the_establishment) to painterResource(id = R.drawable.ic_bar),

@@ -15,14 +15,12 @@ class OnboardingViewModel @Inject constructor(
     private val logoutUseCase : LogoutUseCase
 ) : ViewModel() {
 
-    // Поля для первой формы
     private val _userName = MutableStateFlow("")
     val userName: StateFlow<String> = _userName
 
     private val _numberOrEmail = MutableStateFlow("")
     val numberOrEmail: StateFlow<String> = _numberOrEmail
 
-    // Поля для второй формы
     private val _storeName = MutableStateFlow("")
     val storeName: StateFlow<String> = _storeName
 
@@ -38,11 +36,9 @@ class OnboardingViewModel @Inject constructor(
     private val _automationSystem = MutableStateFlow("")
     val automationSystem: StateFlow<String> = _automationSystem
 
-    // Добавляем поле для типа заведений
     private val _selectedBusinessTypes = MutableStateFlow<List<String>>(emptyList())
     val selectedBusinessTypes: StateFlow<List<String>> = _selectedBusinessTypes
 
-    // Поля для ввода данных о площади заведения
     private val _totalArea = MutableStateFlow("")
     val totalArea: StateFlow<String> = _totalArea
 
@@ -55,21 +51,16 @@ class OnboardingViewModel @Inject constructor(
     private val _kitchenArea = MutableStateFlow("")
     val kitchenArea: StateFlow<String> = _kitchenArea
 
-    // Поля для выбора типов сервисов
     private val _selectedServices = MutableStateFlow<List<String>>(emptyList())
     val selectedServices: StateFlow<List<String>> = _selectedServices
 
-    // Логика показа кнопки "Пропустить"
     private val _showSkip = MutableStateFlow(false)
     val showSkip: StateFlow<Boolean> = _showSkip
 
-
-    // Логика для отображения кнопки "Пропустить"
      fun updateSkipButtonState(shouldShowSkip: Boolean) {
         _showSkip.value = shouldShowSkip
      }
 
-    // Метод для изменения выбранных типов сервисов
     fun onServiceSelectChange(service: String) {
         val currentServices = _selectedServices.value.toMutableList()
         if (currentServices.contains(service)) {
@@ -80,7 +71,6 @@ class OnboardingViewModel @Inject constructor(
         _selectedServices.value = currentServices
     }
 
-    // Методы для изменения данных
     fun onTotalAreaChange(newValue: String) {
         _totalArea.value = newValue
     }
@@ -97,7 +87,6 @@ class OnboardingViewModel @Inject constructor(
         _kitchenArea.value = newValue
     }
 
-    // Метод для изменения выбранных типов
     fun onTypeSelectChange(type: String) {
         val currentTypes = _selectedBusinessTypes.value.toMutableList()
         if (currentTypes.contains(type)) {
@@ -108,7 +97,6 @@ class OnboardingViewModel @Inject constructor(
         _selectedBusinessTypes.value = currentTypes
     }
 
-    // Методы для обновления состояния
     fun onStoreNameChange(newName: String) {
         _storeName.value = newName
     }
