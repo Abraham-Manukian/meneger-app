@@ -20,7 +20,9 @@ import net.nomia.common.ui.theme.appResources
 @Composable
 fun TopSection(showSkip: Boolean, onSkipClicked: (() -> Unit)?, currentStep: Int) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         // Иконка приложения

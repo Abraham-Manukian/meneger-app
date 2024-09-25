@@ -30,11 +30,6 @@ fun FormButtons(
     onContinueClick: () -> Unit,
 ) {
     Column {
-        Divider(
-            color = MaterialTheme.colorScheme.outline,
-            thickness = 1.dp,
-            modifier = Modifier.fillMaxWidth()
-        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()

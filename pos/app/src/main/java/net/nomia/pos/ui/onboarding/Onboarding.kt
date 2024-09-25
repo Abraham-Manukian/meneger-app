@@ -15,50 +15,90 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import net.nomia.pos.ui.theme.PosTheme
 import net.nomia.common.ui.composable.NomiaProgressBar
-import net.nomia.common.ui.previews.ThemePreviews
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.ui.platform.LocalContext
+import android.app.Activity
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 
+
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 internal fun OnboardingContent(
     currentStep: Int,
     totalSteps: Int,
-    showSkip: Boolean,
+    isTablet: Boolean,
+    showSkip: Boolean = false,
     onSkipClicked: (() -> Unit)? = null,
     onBackClick: () -> Unit,
     onContinueClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+    // Применяем отступы на основе пропорций макета (360dp для основного контента)
+    val horizontalPadding = if (isTablet) 360.dp else 16.dp
+
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.SpaceBetween
+            .fillMaxSize(),  // Контейнер занимает весь экран
+        verticalArrangement = Arrangement.SpaceBetween  // Разделяем пространство сверху и снизу
     ) {
-        // Верхняя часть с иконкой и кнопкой "Пропустить"
-        TopSection(
-            showSkip = showSkip,
-            onSkipClicked = onSkipClicked,
-            currentStep = currentStep
-        )
-
-        // Основной контент (формы)
+        // Верхняя часть без отступов (иконка, прогресс-бар и кнопка "Пропустить")
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Логотип и кнопка "Пропустить"
+            TopSection(
+                showSkip = showSkip,
+                onSkipClicked = onSkipClicked,
+                currentStep = currentStep
+            )
+
+            // Прогресс-бар
+            NomiaProgressBar(steps = totalSteps, currentStep = currentStep)
+        }
+
+        // Основной контент с отступами
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .padding(horizontal = horizontalPadding),  // Отступы только у основного контента
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+
             content()
         }
 
-        // Кнопки "Назад" и "Продолжить"
-        FormButtons(
-            currentStep = currentStep,
-            totalSteps = totalSteps,
-            onBackClick = onBackClick,
-            onContinueClick = onContinueClick
+        Divider(
+            color = MaterialTheme.colorScheme.outline,
+            thickness = 1.dp,
+            modifier = Modifier.fillMaxWidth()
         )
+
+        Column(
+            modifier = Modifier
+                .padding(horizontal = horizontalPadding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            FormButtons(
+                currentStep = currentStep,
+                totalSteps = totalSteps,
+                onBackClick = onBackClick,
+                onContinueClick = onContinueClick
+            )
+        }
     }
 }
 
-
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun Onboarding(
     viewModel: OnboardingViewModel = hiltViewModel()
@@ -67,10 +107,17 @@ fun Onboarding(
         val currentStep by viewModel.currentStep.collectAsState()
         val showSkip by viewModel.showSkip.collectAsState()
 
+        val context = LocalContext.current
+        val windowSizeClass = calculateWindowSizeClass(context as Activity)
+
+        // Определяем, является ли устройство планшетом
+        val isTablet = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium || windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded
+
         OnboardingContent(
             currentStep = currentStep,
             totalSteps = 6,
             showSkip = showSkip,
+            isTablet = isTablet,
             onSkipClicked = { viewModel.goToNextStep() },
             onBackClick = { viewModel.goToPreviousStep() },
             onContinueClick = { viewModel.goToNextStep() }
@@ -84,9 +131,6 @@ fun Onboarding(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                // Прогресс-бар
-                NomiaProgressBar(steps = 6, currentStep = currentStep)
-
                 Spacer(modifier = Modifier.height(8.dp))
 
                 when (currentStep) {
@@ -95,10 +139,9 @@ fun Onboarding(
                         onUserNameChange = { viewModel.onUserNameChange(it) },
                         numberOrEmail = viewModel.numberOrEmail.collectAsState().value,
                         onNumberOrEmailChange = { viewModel.onNumberOrEmailChange(it) },
-                        onContinueClick = { viewModel.goToNextStep()},
+                        onContinueClick = { viewModel.goToNextStep() },
                         onSkipChange = { viewModel.updateSkipButtonState(it) }
                     )
-
 
                     2 -> StoreDataForm(
                         storeName = viewModel.storeName.collectAsState().value,
@@ -146,7 +189,3 @@ fun Onboarding(
         }
     }
 }
-
-
-
-
