@@ -5,7 +5,7 @@ lifecycle = "2.6.1"
 firebaseBom = "32.1.1"
 dagger = "2.46.1"
 hilt = "1.0.0"
-room = "2.5.2"
+room = "2.6.1"
 compose = "1.4.3"
 composeBom = "2023.05.01"
 navigation = "2.5.3"
@@ -22,7 +22,7 @@ splashScreen = "1.0.1"
 activity = "1.7.2"
 appcompat = "1.6.1"
 material = "1.9.0"
-roomCommon = "2.6.1"
+roomCommon = "2.5.2"
 
 [libraries]
 #Android
@@ -92,7 +92,7 @@ navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref 
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 #Paging
-paging = "androidx.paging:paging-runtime-ktx:3.1.1"
+paging = "androidx.paging:paging-runtime-ktx:3.3.2"
 compose-paging = "androidx.paging:paging-compose:1.0.0-alpha20"#3.2.0-rc01
 
 #Apollo
@@ -122,6 +122,7 @@ aqsi = "net.nomia.integration:allinone-aqsi:0.0.18"
 #Google
 material = { module = "com.google.android.material:material", version.ref = "material" }
 gson = "com.google.code.gson:gson:2.10.1"
+#noinspection RiskyLibrary
 playCore = "com.google.android.play:core:1.10.3"
 playCoreKtx = "com.google.android.play:core-ktx:1.8.1"
 libphonenumber = "com.googlecode.libphonenumber:libphonenumber:8.13.15"
@@ -186,6 +187,7 @@ toolargetool = "com.gu.android:toolargetool:0.3.0"
 plot = "com.github.madrapps:plot:0.2.2"
 pinView = "io.github.chaosleung:pinview:1.4.4"
 room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
+
 
 [plugins]
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

@@ -1,6 +1,7 @@
 package net.nomia.common.data.database
 
-import androidx.room.Database
+
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import net.nomia.common.data.dao.StoreDao
 import net.nomia.common.data.model.StoreEntity

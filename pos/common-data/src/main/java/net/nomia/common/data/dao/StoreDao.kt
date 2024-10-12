@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import net.nomia.common.data.model.StoreEntity
 import java.util.UUID
 
 @Dao

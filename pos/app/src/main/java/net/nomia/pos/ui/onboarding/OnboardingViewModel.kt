@@ -1,5 +1,6 @@
 package net.nomia.pos.ui.onboarding
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -57,7 +58,8 @@ class OnboardingViewModel @Inject constructor(
     private val _showSkip = MutableStateFlow(false)
     val showSkip: StateFlow<Boolean> = _showSkip
 
-     fun updateSkipButtonState(shouldShowSkip: Boolean) {
+
+    fun updateSkipButtonState(shouldShowSkip: Boolean) {
         _showSkip.value = shouldShowSkip
      }
 
